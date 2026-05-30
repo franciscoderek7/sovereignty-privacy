@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereignty Privacy — Data Broker Removal & Reputation Defense</title>
+    <meta name="description" content="Remove your data from 1,000+ brokers. Reputation defense. Privacy restoration. Enterprise-grade protection.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --vault-grey: #3A3F47;
+            --signal-green: #00FF41;
+            --classified: #1a1a1a;
+            --text-light: #FFFFFF;
+            --text-muted: #AAAAAA;
+            --accent-red: #FF3333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--classified) 0%, #0d0d0d 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--signal-green);
+        }
+
+        .logo {
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--signal-green);
+            letter-spacing: 0.15em;
+        }
+
+        .logo span { color: var(--vault-grey); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--signal-green);
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.05) 0%, rgba(255, 51, 51, 0.05) 100%);
+            border-bottom: 2px solid var(--signal-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '[CLASSIFIED] [REDACTED] [SEALED]';
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            color: var(--signal-green);
+            opacity: 0.3;
+            letter-spacing: 0.2em;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--signal-green);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--signal-green);
+            border: 2px solid var(--signal-green);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .btn:hover {
+            background: var(--signal-green);
+            color: var(--classified);
+        }
+
+        /* Services */
+        .services {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--signal-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(58, 63, 71, 0.5) 0%, rgba(0, 255, 65, 0.05) 100%);
+            border: 1px solid var(--signal-green);
+            padding: 35px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '[CLASSIFIED]';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.6rem;
+            color: var(--signal-green);
+            opacity: 0.5;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-red);
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.1) 0%, rgba(0, 255, 65, 0.1) 100%);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--signal-green);
+            margin-bottom: 15px;
+        }
+
+        .service-name {
+            font-size: 1.1rem;
+            color: var(--signal-green);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Threat Assessment */
+        .threat-assessment {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, rgba(58, 63, 71, 0.3) 0%, rgba(0, 255, 65, 0.05) 100%);
+            border-top: 2px solid var(--signal-green);
+            border-bottom: 2px solid var(--signal-green);
+        }
+
+        .threat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .threat-card {
+            background: var(--classified);
+            border: 1px solid var(--signal-green);
+            padding: 25px;
+            text-align: center;
+        }
+
+        .threat-number {
+            font-size: 2.5rem;
+            color: var(--signal-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .threat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 5%;
+            background: var(--classified);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, rgba(58, 63, 71, 0.8) 0%, rgba(0, 255, 65, 0.05) 100%);
+            border: 2px solid var(--signal-green);
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .price-card:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-10px);
+        }
+
+        .price-tier {
+            font-size: 0.8rem;
+            color: var(--signal-green);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+
+        .price-name {
+            font-size: 1.3rem;
+            color: var(--signal-green);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .price-amount {
+            font-size: 2.5rem;
+            color: var(--signal-green);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .price-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .price-list {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .price-list li {
+            padding: 10px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--vault-grey);
+        }
+
+        .price-list li::before {
+            content: '▸ ';
+            color: var(--signal-green);
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 2px solid var(--signal-green);
+            background: var(--classified);
+        }
+
+        .footer-branding {
+            color: var(--signal-green);
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .omniaguard-badge {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 0.75rem;
+            color: #00FFFF;
+            border: 1px solid #00FFFF;
+            display: inline-block;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .nav-links { gap: 20px; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SOVEREIGNTY <span>PRIVACY</span></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#threat">Threat</a>
+            <a href="#pricing">Pricing</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Reclaim Your <span>Data Sovereignty</span></h1>
+        <p>Remove your personal data from 1,000+ brokers. Reputation defense. Privacy restoration. Enterprise-grade protection.</p>
+        <a href="#pricing" class="btn">Start Removal</a>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Privacy Services</h2>
+            <p>Comprehensive data protection and reputation management.</p>
+        </div>
+
+        <div class="grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-trash-alt"></i></div>
+                <div class="service-name">Data Broker Removal</div>
+                <div class="service-desc">Automated removal from 1,000+ data brokers, people search sites, and aggregators.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="service-name">Reputation Defense</div>
+                <div class="service-desc">Monitor and suppress negative search results. Restore your online identity.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-search"></i></div>
+                <div class="service-name">Deep Web Monitoring</div>
+                <div class="service-desc">24/7 scanning of dark web and underground forums for your personal data.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-lock"></i></div>
+                <div class="service-name">Identity Protection</div>
+                <div class="service-desc">Credit monitoring, fraud alerts, and identity theft insurance coverage.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="service-name">Data Audit</div>
+                <div class="service-desc">Comprehensive analysis of where your data exists and exposure risk assessment.</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-user-secret"></i></div>
+                <div class="service-name">Anonymous Profile</div>
+                <div class="service-desc">Create and maintain a clean digital footprint with privacy-first architecture.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="threat-assessment" id="threat">
+        <div class="section-header">
+            <h2>Your Data Exposure</h2>
+            <p>The average person's data exists on 1,000+ platforms.</p>
+        </div>
+
+        <div class="threat-grid">
+            <div class="threat-card">
+                <div class="threat-number">1,247</div>
+                <div class="threat-label">Data Brokers</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-number">847M</div>
+                <div class="threat-label">Records Exposed</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-number">$15B</div>
+                <div class="threat-label">Annual Fraud Loss</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-number">24/7</div>
+                <div class="threat-label">Monitoring Active</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <h2>Privacy Plans</h2>
+            <p>Enterprise-grade data protection for individuals and organizations.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-tier">Individual</div>
+                <div class="price-name">Personal</div>
+                <div class="price-amount">$29</div>
+                <div class="price-sub">per month</div>
+                <ul class="price-list">
+                    <li>Data broker removal</li>
+                    <li>Monthly monitoring</li>
+                    <li>Reputation alerts</li>
+                    <li>Email support</li>
+                </ul>
+                <button class="btn">Get Started</button>
+            </div>
+
+            <div class="price-card">
+                <div class="price-tier">Professional</div>
+                <div class="price-name">Premium</div>
+                <div class="price-amount">$79</div>
+                <div class="price-sub">per month</div>
+                <ul class="price-list">
+                    <li>Deep web monitoring</li>
+                    <li>Identity theft insurance</li>
+                    <li>Credit monitoring</li>
+                    <li>24/7 support</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+
+            <div class="price-card">
+                <div class="price-tier">Enterprise</div>
+                <div class="price-name">Corporate</div>
+                <div class="price-amount">$499</div>
+                <div class="price-sub">per month</div>
+                <ul class="price-list">
+                    <li>Unlimited users</li>
+                    <li>Custom integrations</li>
+                    <li>Dedicated account manager</li>
+                    <li>Executive reporting</li>
+                </ul>
+                <button class="btn">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-branding">SOVEREIGNTY PRIVACY</div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 Sovereignty Privacy. Reclaim your data sovereignty.</p>
+            <p>Contact: Derek Francisco | 705-307-8080</p>
+            <p>A Francisco Holdings Inc. subsidiary.</p>
+            <div class="omniaguard-badge">🔒 Secured by OmniaGuard — Zero Prompt Injection</div>
+        </div>
+    </footer>
+
+</body>
+</html>
